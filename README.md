@@ -1,108 +1,96 @@
-✈️ Airline Revenue & Profitability Analysis Dashboard
-An interactive Streamlit-based dashboard for analyzing airline revenue, operational costs, and profitability using a SQLite database. The application provides a simple and user-friendly interface to visualize airline financial performance and route-wise statistics.
+# Airline Revenue & Profitability Analysis System
 
-📌 Project Overview
-The Airline Revenue & Profitability Analysis Dashboard is designed to help users analyze airline business performance through interactive visualizations and key financial metrics.
+This is a complete Streamlit + SQLite project for analyzing airline revenue, cost structure, route profitability, operating profit, load factor, RASK, CASK, and profit margins.
 
-The dashboard enables users to:
+## Files
 
-Analyze total revenue, operational costs, and profits
-Compare profitability across different flight routes
-Visualize revenue and profit using interactive charts
-View complete airline data stored in a SQLite database
-Gain insights into airline financial performance through an intuitive interface
-This project is suitable for students learning Data Analytics, Business Intelligence, and Python Dashboard Development.
+- `app.py` - Main Streamlit dashboard
+- `database.py` - SQLite database creation, sample data generation, insert/reset functions
+- `airline_analysis.db` - SQLite database file, created automatically when the app runs
+- `requirements.txt` - Python packages needed
 
-🚀 Features
-📊 Revenue Analysis
-💰 Cost Analysis
-📈 Profit Analysis
-✈️ Route-wise Performance Analysis
-📉 Interactive Charts
-📋 Flight Data Table
-🗄️ SQLite Database Integration
-🎨 Clean and Responsive Streamlit Dashboard
-🛠️ Technologies Used
-Technology	Purpose
-Python	Programming Language
-Streamlit	Interactive Dashboard
-Pandas	Data Processing
-SQLite	Database
-Matplotlib (optional)	Data Visualization
-📂 Project Structure
-Airline-Revenue-Profitability-Analysis/
-│
-├── app.py
-├── requirements.txt
-├── README.md
+## How to Run on Windows CMD
 
+Open CMD inside this folder and run:
 
-
-## ⚙️ Installation
-
-Run:
+```bash
 pip install -r requirements.txt
 streamlit run app.py
+```
 
+If `streamlit` is not recognized, run:
 
-## 📊 Dashboard Preview
+```bash
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
+```
 
-The dashboard contains:
+## Database Design
 
-- Total Revenue
-- Total Cost
-- Total Profit
-- Revenue by Route Chart
-- Profit by Route Chart
-- Flight Data Table
+### 1. airports
+Stores airport master data.
 
-The database stores airline operational data such as:
+Columns:
+- airport_code
+- airport_name
+- city
+- country
 
-- Flight Route
-- Revenue
-- Operating Cost
-- Profit
+### 2. routes
+Stores route-level information.
 
-## 📈 Sample Dashboard Metrics
+Columns:
+- route_id
+- origin_code
+- destination_code
+- distance_km
+- route_type
 
-- Total Revenue
-- Total Operational Cost
-- Total Profit
-- Route-wise Revenue
-- Route-wise Profitability
+### 3. flight_financials
+Stores each flight's revenue and cost information.
 
-## 🎯 Objectives
+Columns:
+- flight_id
+- flight_date
+- airline
+- route_id
+- aircraft_type
+- seat_capacity
+- passengers
+- avg_fare
+- ancillary_revenue
+- cargo_revenue
+- fuel_cost
+- crew_cost
+- maintenance_cost
+- airport_fees
+- leasing_cost
+- other_cost
+- delay_minutes
+- cancelled
 
-- Analyze airline financial performance
-- Visualize business data interactively
-- Demonstrate dashboard development using Streamlit
-- Integrate SQL databases with Python applications
-- Provide an easy-to-understand business analytics solution
+## Main Formulas
 
-## 🔮 Future Enhancements
+```text
+Passenger Revenue = Passengers × Average Fare
+Total Revenue = Passenger Revenue + Ancillary Revenue + Cargo Revenue
+Total Cost = Fuel + Crew + Maintenance + Airport Fees + Leasing + Other Costs
+Operating Profit = Total Revenue - Total Cost
+Profit Margin (%) = Operating Profit ÷ Total Revenue × 100
+Load Factor (%) = Passengers ÷ Seat Capacity × 100
+ASK = Seat Capacity × Distance
+RPK = Passengers × Distance
+RASK = Total Revenue ÷ ASK
+CASK = Total Cost ÷ ASK
+Yield per RPK = Passenger Revenue ÷ RPK
+```
 
-- Airline-wise comparison
-- Monthly and yearly trend analysis
-- Passenger load factor analysis
-- Revenue forecasting using Machine Learning
-- Profit prediction
-- Interactive filters
-- Download reports as PDF/Excel
-- User authentication
-- Cloud database integration
+## Dashboard Pages
 
-## 🎓 Learning Outcomes
+1. Executive Dashboard
+2. Revenue Analysis
+3. Profitability Analysis
+4. Route & Flight Performance
+5. Database Manager
 
-This project demonstrates practical implementation of:
-
-- Data Analytics
-- Business Intelligence
-- Python Programming
-- SQL Database Management
-- Data Visualization
-- Dashboard Development
-- Streamlit Framework
-
-Run:
-pip install -r requirements.txt
-streamlit run app.py
+The Database Manager page lets you add new flight records and download filtered data as CSV.
